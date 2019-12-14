@@ -2,6 +2,7 @@
 
 require_once(__DIR__."/Plugin.php");
 
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: text/plain');
 
 $target_dir = "uploads/";

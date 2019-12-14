@@ -5,10 +5,10 @@ require_once(__DIR__."/Plugin.php");
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: text/plain');
 
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$original_file = basename($_FILES["fileToUpload"]["name"]);
+$temp_file = tempnam(sys_get_temp_dir(), $original_file);
 $uploadOk = 1;
-$pmfType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$pmfType = strtolower(pathinfo($original_file,PATHINFO_EXTENSION));
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
@@ -28,16 +28,13 @@ if ($uploadOk == 0) {
     return;
 // if everything is ok, try to upload file
 } else {
-    // Check if file already exists
-    if (!file_exists($target_file)) {
-        if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "Sorry, there was an error uploading your file.";
-            return;
-        }
+    if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $temp_file)) {
+        echo "Sorry, there was an error uploading your file.";
+        return;
     }
 }
 
-$plugin = new PMFPlugin($target_file);
+$plugin = new PMFPlugin($temp_file);
 
 function utf8ize( $mixed ) {
     if (is_array($mixed)) {

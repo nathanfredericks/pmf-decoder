@@ -2,7 +2,7 @@
 
 require_once(__DIR__."/Plugin.php");
 
-header('Content-Type: application/json');
+header('Content-Type: text/plain');
 
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -49,5 +49,6 @@ function utf8ize( $mixed ) {
     return $mixed;
 }
 
+header('Content-Type: application/json');
 $result = json_encode(utf8ize($plugin->getPluginInfo()));
 echo $result;

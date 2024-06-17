@@ -18,6 +18,8 @@ jobs:
     steps:
         - name: Checkout repository
           uses: actions/checkout@v4
+        - name: Set up QEMU
+          uses: docker/setup-qemu-action@v3
         - name: Log in to the Container registry
           uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
           with:
@@ -35,8 +37,9 @@ jobs:
           with:
             context: .
             target: builder
+            platforms: linux/amd64,linux/arm64
             push: true
-            tags: ${{ steps.meta.outputs.tags }}
+            tags: ${{ steps.meta.outputs.tags }},latest
             labels: ${{ steps.meta.outputs.labels }}
         - name: Generate artifact attestation
           uses: actions/attest-build-provenance@v1

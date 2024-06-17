@@ -1,10 +1,6 @@
 services:
   web:
-    build:
-      context: .
-      target: builder
+    build: .
     restart: always
     ports:
       - '80:80'
-    volumes:
-      - .:/var/www/html/

@@ -3,6 +3,7 @@ services:
     build:
       context: .
       target: builder
+    restart: always
     ports:
       - '80:80'
     volumes:

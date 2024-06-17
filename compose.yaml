@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      target: builder
+    ports:
+      - '80:80'
+    volumes:
+      - .:/var/www/html/

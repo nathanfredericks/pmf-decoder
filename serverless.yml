@@ -1,0 +1,32 @@
+service: pmf-decoder
+
+provider:
+    name: aws
+    region: ca-central-1
+    httpApi:
+        cors: true
+    apiGateway:
+        binaryMediaTypes:
+            - '*/*'
+    environment:
+        BREF_BINARY_RESPONSES: '1'
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    upload:
+        handler: index.php
+        description: ''
+        runtime: php-83-fpm
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        events:
+            - httpApi:
+                method: POST
+                path: /
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!node_modules/**'
+        - '!tests/**'

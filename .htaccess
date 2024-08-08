@@ -1,9 +1,0 @@
-RewriteEngine On
-
-RewriteCond %{REQUEST_URI} ^(/index\.php|/)$
-
-RewriteCond %{REQUEST_METHOD} !POST
-RewriteRule ^ - [R=405,L]
-
-RewriteCond %{REQUEST_URI} !^(/index\.php|/)$
-RewriteRule ^ - [R=404,L]

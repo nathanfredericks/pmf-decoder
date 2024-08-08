@@ -21,13 +21,6 @@ if ($original_file_type != "pmf") {
     return;
 }
 
-if ($_FILES["plugin"]["size"] > 5242880) {
-    $response["message"] = "file size larger than 5MB";
-    http_response_code(400);
-    echo json_encode($response);
-    return;
-}
-
 $temp_file = tempnam(sys_get_temp_dir(), $original_file);
 if (!move_uploaded_file($_FILES["plugin"]["tmp_name"], $temp_file)) {
     $response["message"] = "error uploading file";

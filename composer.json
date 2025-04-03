@@ -1,5 +1,12 @@
 {
+    "name": "nathanfredericks/pmf-decoder",
     "require": {
-        "bref/bref": "^2.3"
-    }
+        "google/cloud-functions-framework": "^1.4"
+    },
+    "authors": [
+        {
+            "name": "Nathan Fredericks",
+            "email": "nathan@fredericks.dev"
+        }
+    ]
 }
